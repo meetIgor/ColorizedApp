@@ -23,7 +23,7 @@
                                     <constraint firstAttribute="height" constant="166" id="216-Ux-QK5"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="Bt4-TJ-gcw">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Bt4-TJ-gcw">
                                 <rect key="frame" x="16" y="317" width="382" height="118"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="wJN-pt-R2k">
@@ -53,7 +53,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="p0L-A1-Pvp">
-                                        <rect key="frame" x="67.5" y="0.0" width="40" height="118"/>
+                                        <rect key="frame" x="56.5" y="0.0" width="40" height="118"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHP-l3-F5Z">
                                                 <rect key="frame" x="0.0" y="0.0" width="23" height="23.5"/>
@@ -79,24 +79,24 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="eaw-GC-PJ7">
-                                        <rect key="frame" x="126.5" y="0.0" width="255.5" height="118"/>
+                                        <rect key="frame" x="104.5" y="0.0" width="277.5" height="118"/>
                                         <subviews>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.20000000000000001" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lX8-RJ-Ys7">
-                                                <rect key="frame" x="-2" y="0.0" width="259.5" height="31"/>
+                                                <rect key="frame" x="-2" y="0.0" width="281.5" height="31"/>
                                                 <color key="minimumTrackTintColor" systemColor="systemRedColor"/>
                                                 <connections>
                                                     <action selector="slidersAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="GFS-7Y-sZU"/>
                                                 </connections>
                                             </slider>
                                             <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.40000000000000002" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="er3-eT-uUK">
-                                                <rect key="frame" x="-2" y="44" width="259.5" height="31"/>
+                                                <rect key="frame" x="-2" y="44" width="281.5" height="31"/>
                                                 <color key="minimumTrackTintColor" systemColor="systemGreenColor"/>
                                                 <connections>
                                                     <action selector="slidersAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="BUa-Vn-cnW"/>
                                                 </connections>
                                             </slider>
                                             <slider opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.59999999999999998" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="v7D-fV-Tb3">
-                                                <rect key="frame" x="-2" y="88" width="259.5" height="31"/>
+                                                <rect key="frame" x="-2" y="88" width="281.5" height="31"/>
                                                 <color key="minimumTrackTintColor" systemColor="systemBlueColor"/>
                                                 <connections>
                                                     <action selector="slidersAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="UeR-5b-S6J"/>
