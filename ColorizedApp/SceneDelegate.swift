@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  ColorizedApp
+//  HomeWork #3 - 2.28 - ColorizedApp
 //
-//  Created by igor s on 25.06.2022.
+//  Created by igor s on 23.06.2022.
 //
 
 import UIKit
