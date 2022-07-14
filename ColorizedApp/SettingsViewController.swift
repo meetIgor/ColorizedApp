@@ -20,6 +20,10 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var greenLabel: UILabel!
     @IBOutlet weak var blueLabel: UILabel!
     
+    @IBOutlet weak var redTextField: UITextField!
+    @IBOutlet weak var greenTextField: UITextField!
+    @IBOutlet weak var blueTextField: UITextField!
+    
     //MARK: - Public Properties
     var color: UIColor!
     var delegate: SettingsViewControllerDelegate!
@@ -29,6 +33,10 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         resultView.layer.cornerRadius = 30
         updateUI()
+        redTextField.delegate = self
+        greenTextField.delegate = self
+        blueTextField.delegate = self
+        setKeyboardToolBar()
     }
     
     //MARK: - IB Actions
@@ -37,13 +45,18 @@ class SettingsViewController: UIViewController {
         setValue(for: sender.tag)
     }
     
+    
     @IBAction func doneButtonPressed() {
+        view.endEditing(true)
         guard let viewColor = resultView.backgroundColor else { return }
         delegate.setColor(viewColor)
         dismiss(animated: true)
         
     }
     
+    @objc func doneTBButtonPressed() {
+        view.endEditing(true)
+    }
     
     //MARK: - Private Methods
     private func updateUI() {
@@ -67,22 +80,70 @@ class SettingsViewController: UIViewController {
         )
     }
     
-    private func string(from slider: UISlider) -> String {
-        String(format: "%.2f", slider.value)
-    }
-    
     private func setValue(for labelTag: Int...) {
         labelTag.forEach { tag in
             switch tag {
             case 0:
                 redLabel.text = string(from: redSlider)
+                redTextField.text = string(from: redSlider)
             case 1:
                 greenLabel.text = string(from: greenSlider)
+                greenTextField.text = string(from: greenSlider)
             default:
                 blueLabel.text = string(from: blueSlider)
+                blueTextField.text = string(from: blueSlider)
             }
         }
     }
     
+    private func string(from slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
+    }
+    
 }
 
+//Mark: - UITextFieldDelegate
+extension SettingsViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let newValue = textField.text else { return }
+        guard let colorValue = Float(newValue) else { return }
+        
+        guard colorValue >= 0, colorValue <= 1 else { return }
+        
+        switch textField.tag {
+        case 0:
+            redSlider.setValue(colorValue, animated: true)
+            slidersAction(redSlider)
+        case 1:
+            greenSlider.setValue(colorValue, animated: true)
+            slidersAction(greenSlider)
+        default:
+            blueSlider.setValue(colorValue, animated: true)
+            slidersAction(blueSlider)
+        }
+    }
+}
+
+//Mark: - setKeyboardToolBar
+extension SettingsViewController {
+    private func setKeyboardToolBar() {
+        let doneToolBar = UIToolbar()
+        let doneButton = UIBarButtonItem(
+            title: "Done",
+            style: .done,
+            target: self,
+            action: #selector(doneTBButtonPressed)
+        )
+        let flexSpace = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        doneToolBar.items = [flexSpace, doneButton]
+        doneToolBar.sizeToFit()
+        
+        redTextField.inputAccessoryView = doneToolBar
+        greenTextField.inputAccessoryView = doneToolBar
+        blueTextField.inputAccessoryView = doneToolBar
+    }
+}
