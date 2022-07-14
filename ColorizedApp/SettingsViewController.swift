@@ -58,6 +58,10 @@ class SettingsViewController: UIViewController {
         view.endEditing(true)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     //MARK: - Private Methods
     private func updateUI() {
         let newColor = CIColor(color: color)
