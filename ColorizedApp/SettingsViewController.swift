@@ -100,6 +100,7 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    
     private func string(from slider: UISlider) -> String {
         String(format: "%.2f", slider.value)
     }
