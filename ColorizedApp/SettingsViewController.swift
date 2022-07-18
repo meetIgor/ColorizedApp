@@ -36,7 +36,7 @@ class SettingsViewController: UIViewController {
         redTextField.delegate = self
         greenTextField.delegate = self
         blueTextField.delegate = self
-        setKeyboardToolBar()
+        //setKeyboardToolBar()
     }
     
     //MARK: - IB Actions
@@ -47,7 +47,6 @@ class SettingsViewController: UIViewController {
     
     
     @IBAction func doneButtonPressed() {
-        view.endEditing(true)
         guard let viewColor = resultView.backgroundColor else { return }
         delegate.setColor(viewColor)
         dismiss(animated: true)
@@ -59,6 +58,7 @@ class SettingsViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
     
@@ -104,34 +104,44 @@ class SettingsViewController: UIViewController {
         String(format: "%.2f", slider.value)
     }
     
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+    
 }
 
 //Mark: - UITextFieldDelegate
 extension SettingsViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let newValue = textField.text else { return }
-        guard let colorValue = Float(newValue) else { return }
         
-        guard colorValue >= 0, colorValue <= 1 else { return }
-        
-        switch textField.tag {
-        case 0:
-            redSlider.setValue(colorValue, animated: true)
-            slidersAction(redSlider)
-        case 1:
-            greenSlider.setValue(colorValue, animated: true)
-            slidersAction(greenSlider)
-        default:
-            blueSlider.setValue(colorValue, animated: true)
-            slidersAction(blueSlider)
+        if let colorValue = Float(newValue), colorValue <= 1, colorValue >= 0 {
+            switch textField.tag {
+            case 0:
+                redSlider.setValue(colorValue, animated: true)
+                slidersAction(redSlider)
+            case 1:
+                greenSlider.setValue(colorValue, animated: true)
+                slidersAction(greenSlider)
+            default:
+                blueSlider.setValue(colorValue, animated: true)
+                slidersAction(blueSlider)
+            }
+            return
         }
+        
+        showAlert(title: "Wrong format!", message: "Please, enter correct value!")
     }
-}
-
-//Mark: - setKeyboardToolBar
-extension SettingsViewController {
-    private func setKeyboardToolBar() {
+    
+    //setKeyboardToolBar
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         let doneToolBar = UIToolbar()
+        doneToolBar.sizeToFit()
+        textField.inputAccessoryView = doneToolBar
+        
         let doneButton = UIBarButtonItem(
             title: "Done",
             style: .done,
@@ -143,11 +153,7 @@ extension SettingsViewController {
             target: nil,
             action: nil
         )
-        doneToolBar.items = [flexSpace, doneButton]
-        doneToolBar.sizeToFit()
         
-        redTextField.inputAccessoryView = doneToolBar
-        greenTextField.inputAccessoryView = doneToolBar
-        blueTextField.inputAccessoryView = doneToolBar
+        doneToolBar.items = [flexSpace, doneButton]
     }
 }

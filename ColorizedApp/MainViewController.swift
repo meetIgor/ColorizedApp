@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SettingsViewControllerDelegate {
-    func setColor(_ color:UIColor)
+    func setColor(_ color: UIColor)
 }
 
 
